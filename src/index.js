@@ -1,87 +1,91 @@
-import NewFetchClass from "./js/creatFeatch";
-import { createListImagesElement } from "./js/createListElement";
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import './css/main.css';
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
+// import NewFetchClass from "./js/creatFeatch";
+// import { createListImagesElement } from "./js/createListElement";
+// import { Notify } from 'notiflix/build/notiflix-notify-aio';
+// import './css/main.css';
+// import SimpleLightbox from "simplelightbox";
+// import "simplelightbox/dist/simple-lightbox.min.css";
 
 
-const form = document.getElementById('search-form');
-const imagesList = document.querySelector('.gallery');
-const btn = document.querySelector('.load-more')
-const newfetch = new NewFetchClass;
+// const form = document.getElementById('search-form');
+// const imagesList = document.querySelector('.gallery');
+// const btn = document.querySelector('.load-more')
+// const newfetch = new NewFetchClass;
 
 
-form.addEventListener('submit', loadImg);
-btn.addEventListener('click', loadMoreImg);
+// form.addEventListener('submit', loadImg);
+// btn.addEventListener('click', loadMoreImg);
 
 
-function loadImg(e) {
-    e.preventDefault();
-    btn.classList.add('is-hidden');
+// function loadImg(e) {
+//     e.preventDefault();
+//     btn.classList.add('is-hidden');
 
-    if (newfetch.query !== 0) {
-      imagesList.innerHTML = ''  
-    };
+//     if (newfetch.query !== 0) {
+//       imagesList.innerHTML = ''
+//     };
 
-    newfetch.query = e.currentTarget.elements.searchQuery.value;
-    newfetch.resetPage();
+//     newfetch.query = e.currentTarget.elements.searchQuery.value;
+//     newfetch.resetPage();
 
-    if (newfetch.query == 0) {
+//     if (newfetch.query == 0) {
         
-        return Notify.info(`Enter your search term`);
+//         return Notify.info(`Enter your search term`);
         
-    };
+//     };
 
 
-    newfetch.fetchImages().then(array => {
+//     newfetch.fetchImages().then(array => {
         
-        if (array.hits.length === 0) {
-            return Notify.failure("Sorry, there are no images matching your search query. Please try again.");
-        } else {
-            renderImagesList(array.hits);
-            lightBox();
-            Notify.success(`Hooray! We found ${array.totalHits} images.`);
+//         if (array.hits.length === 0) {
+//             return Notify.failure("Sorry, there are no images matching your search query. Please try again.");
+//         } else {
+//             renderImagesList(array.hits);
+//             lightBox();
+//             Notify.success(`Hooray! We found ${array.totalHits} images.`);
             
-            if (newfetch.perPage > array.totalHits) {
-                Notify.info("We're sorry, but you've reached the end of search results.");
-            } else {
-                btn.classList.remove('is-hidden');
-            }
-        }
+//             if (newfetch.perPage > array.totalHits) {
+//                 Notify.info("We're sorry, but you've reached the end of search results.");
+//             } else {
+//                 btn.classList.remove('is-hidden');
+//             }
+//         }
         
-    });
+//     });
 
     
     
-}
+// }
 
 
-function loadMoreImg() {
-    return newfetch.fetchImages().then(array => {
-        renderImagesList(array.hits);
-        lightBox();
+// function loadMoreImg() {
+//     return newfetch.fetchImages().then(array => {
+//         renderImagesList(array.hits);
+//         lightBox();
 
-        if ( newfetch.page * newfetch.perPage > array.totalHits) {
-            btn.classList.add('is-hidden');
+//         if ( newfetch.page * newfetch.perPage > array.totalHits) {
+//             btn.classList.add('is-hidden');
 
-            Notify.info("We're sorry, but you've reached the end of search results.");
-        }
-    });
-}
+//             Notify.info("We're sorry, but you've reached the end of search results.");
+//         }
+//     });
+// }
 
 
-function renderImagesList(array) {
-    const imageElList = array.map((element => createListImagesElement(element))).join('');
-    return imagesList.insertAdjacentHTML('beforeend', imageElList)
-}
+// function renderImagesList(array) {
+//     const imageElList = array.map((element => createListImagesElement(element))).join('');
+//     return imagesList.insertAdjacentHTML('beforeend', imageElList)
+// }
 
-function lightBox() {
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captions: true,
-    overlay: true,
-    preloading: true,
-    alertErrorMessage: 'Image not found, next image will be loaded',
-  });
-  return lightBox;
-}
+// function lightBox() {
+//   const lightbox = new SimpleLightbox('.gallery a', {
+//     captions: true,
+//     overlay: true,
+//     preloading: true,
+//     alertErrorMessage: 'Image not found, next image will be loaded',
+//   });
+//   return lightBox;
+// }
+
+
+
+// import {fetchTopMovies} from "./js/creatFeatch";
